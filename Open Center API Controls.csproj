@@ -7,4 +7,8 @@
     <RootNamespace>Open_Center_API_Controls</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Packages\" />
+  </ItemGroup>
+
 </Project>
