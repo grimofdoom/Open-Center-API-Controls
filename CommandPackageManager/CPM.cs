@@ -2,7 +2,9 @@
 
 namespace CPM {
     public class Core {
+        /// <summary>Fast access list of all commands across all packages
         public Dictionary<string, Command> callStack = new();
+        /// <summary>All packages found & added</summary>
         public List<Package> packages = new();
 
         public Core() {
@@ -10,13 +12,16 @@ namespace CPM {
         }
 
         /// <summary>Call an action to run by its callStack dictionary name</summary>
-        public void Perform(string actionName) {
-            callStack[actionName].Perform();
+        public object Perform(RecievedCommand cmd) {
+            if (callStack.ContainsKey(cmd.command)){
+                return callStack[cmd.command].Perform(cmd.values);
+            } else {
+                Console.WriteLine("Action does not exist: " + cmd.command);
+                return "Command does not exist: " + cmd.command;
+            }
         }
 
-        /// <summary>
-        /// From scratch, reinitialize commands. Useful to look for new packages while running
-        /// </summary>
+        /// <summary>From scratch, reinitialize commands. Useful to look for new packages while running</summary>
         public void Initialize() {
             //Reset packages and callStack
             callStack = new Dictionary<string, Command>();
@@ -30,24 +35,35 @@ namespace CPM {
                 newPackages.Add(Assembly.LoadFile(dll));
             }
 
+            //Process each found .dll
             foreach (Assembly newPackage in newPackages) {
+                Console.WriteLine("assembly attempt: " + newPackage.FullName);
                 try {
                     //If package exists in assembly, add to packages
-                } catch {
+                    Type? foundPackage = newPackage.GetType("PackageExtension");
+                    if (foundPackage != null) {
+                        //Try and create instance of package to work with
+                        object? classInstance = Activator.CreateInstance(foundPackage);
+                        if (classInstance != null) {
+                            packages.Add((CPM.Package)classInstance);
+                        } else {
+                            throw new Exception("Failed instancing package: " + newPackage.FullName);
+                        }
+                    } else {
+                        throw new Exception("No package found " + newPackage.Location);
+                    }
+                } catch (Exception e){
                     //Something went wrong
+                    Console.WriteLine("Package Error: " + e);
                 }
             }
 
             //Add commands to callStack
-            foreach (Package p in packages) {
-                AddPackage(p);
-            }
-        }
-
-        public void AddPackage(Package package) {
-            foreach (Command cmd in package.commands) {
-                callStack[package.callName + "." + cmd.callName] = cmd;
-                cmd.Initialize();
+            foreach (Package package in packages) {
+                foreach (Command cmd in package.commands) {
+                    callStack[package.callName + "." + cmd.callName] = cmd;
+                    cmd.Initialize();
+                }
             }
         }
 
@@ -61,6 +77,7 @@ namespace CPM {
         }
     }
 
+    /// <summary>A single container holding a set of similar commands</summary>
     public class Package {
         /// <summary>Name of the package</summary>
         public string name = "Default Package 2.1";
@@ -81,6 +98,7 @@ namespace CPM {
         public List<Command> commands = new();
     }
 
+    /// <summary>A single command/action that can be called to perform by frontend</summary>
     public class Command {
         /// <summary>Descriptive name of the command</summary>
         public string name = "Default command name";
@@ -95,13 +113,32 @@ namespace CPM {
         public string description = "A default description about an empty command.";
 
         /// <summary>This is the method ran when command is called</summary>
-        public void Perform() {
-            
+        public virtual object Perform(List<CommandValue> values) {
+            return null;
         }
 
         /// <summary>This is the method ran when the program is first loaded up</summary>
-        public void Initialize() {
+        public virtual void Initialize() {
 
         }
+    }
+
+    /// <summary>Command recieved by frontend</summary>
+    public class RecievedCommand {
+        /// <summary>String value command</summary>
+        public string? command { get; set; }
+
+        /// <summary>Values for command</summary>
+        public List<CommandValue>? values { get; set; }
+    }
+
+    /// <summary>Values sent by frontend</summary>
+    public class CommandValue {
+        public string? name { get; set; }
+        public string? value { get; set; }
+    }
+
+    public class OK {
+        string status = "OK";
     }
 }

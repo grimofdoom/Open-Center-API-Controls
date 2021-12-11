@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open Center API Controls", "Open Center API Controls.csproj", "{6DCC6AF9-D60A-4ABD-8F51-B25F95F30EDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCAC_SystemControls", "..\OCAC_SystemControls\OCAC_SystemControls.csproj", "{2D416FE0-E534-40B5-A69E-C0F5B059261F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6DCC6AF9-D60A-4ABD-8F51-B25F95F30EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DCC6AF9-D60A-4ABD-8F51-B25F95F30EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DCC6AF9-D60A-4ABD-8F51-B25F95F30EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D416FE0-E534-40B5-A69E-C0F5B059261F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D416FE0-E534-40B5-A69E-C0F5B059261F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D416FE0-E534-40B5-A69E-C0F5B059261F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D416FE0-E534-40B5-A69E-C0F5B059261F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
