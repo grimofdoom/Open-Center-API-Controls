@@ -112,6 +112,12 @@ namespace CPM {
         /// <summary>Description of the command</summary>
         public string description = "A default description about an empty command.";
 
+        /// <summary>What values are expected to be passed to this command</summary>
+        public List<ExpectedValues> expectedValues = new();
+
+        /// <summary>Resources that are available for this command</summary>
+        public List<AvailableResources> availableResources = new();
+
         /// <summary>This is the method ran when command is called</summary>
         public virtual object Perform(List<CommandValue> values) {
             return null;
@@ -121,6 +127,30 @@ namespace CPM {
         public virtual void Initialize() {
 
         }
+    }
+
+    public record ExpectedValues {
+        /// <summary>Case Sensitive name of the value</summary>
+        string? name { get; set; }
+
+        /// <summary>Variable type that should be passed through
+        /// <para>Ex: URL, INT, FLOAT, STRING</para></summary>
+        string? varType { get; set; }
+        /// <summary>What should the value represent
+        /// <para>Ex: URL to image</para></summary>
+        string? description { get; set; }
+    }
+
+    public record AvailableResources {
+        /// <summary>Name of the resource</summary>
+        string? name { get; set; }
+
+        /// <summary>What type of resource is this, file type endings when possible</summary>
+        string? resourceType { get; set; }
+
+        /// <summary>Folder, URL, ETC location for gaining access to the resource</summary>
+        string? resourceLocation { get; set; }
+
     }
 
     /// <summary>Command recieved by frontend</summary>
