@@ -131,25 +131,25 @@ namespace CPM {
 
     public record ExpectedValues {
         /// <summary>Case Sensitive name of the value</summary>
-        string? name { get; set; }
+        public string? name { get; set; }
 
         /// <summary>Variable type that should be passed through
         /// <para>Ex: URL, INT, FLOAT, STRING</para></summary>
-        string? varType { get; set; }
+        public string? varType { get; set; }
         /// <summary>What should the value represent
         /// <para>Ex: URL to image</para></summary>
-        string? description { get; set; }
+        public string? description { get; set; }
     }
 
     public record AvailableResources {
         /// <summary>Name of the resource</summary>
-        string? name { get; set; }
+        public string? name { get; set; }
 
         /// <summary>What type of resource is this, file type endings when possible</summary>
-        string? resourceType { get; set; }
+        public string? resourceType { get; set; }
 
         /// <summary>Folder, URL, ETC location for gaining access to the resource</summary>
-        string? resourceLocation { get; set; }
+        public string? resourceLocation { get; set; }
 
     }
 

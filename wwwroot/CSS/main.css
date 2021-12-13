@@ -1,0 +1,60 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+#ButtonContainer{
+    width: 100%;
+    height: 30%;
+}
+
+.CommandBlock {
+    padding: 0;
+    background-color: white;
+    margin: 2px;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: inline-block;
+    align-content: center;
+    text-align: center;
+    word-wrap: anywhere;
+    transition-duration: 500ms;
+    z-index: 400;
+}
+
+.CommandBlock:hover {
+    animation: cmdBlock_Hover 300ms ease 0s 1 normal forwards;
+}
+
+@keyframes cmdBlock_Hover{
+    0% {
+        z-index: 500;
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.CommandBlock:active {
+    transition-delay: 0ms;
+    background-color: red;
+}
+
+.CommandBlock p{
+    width: fit-content;
+    height: fit-content;
+}

@@ -1,6 +1,19 @@
+using System.Net;
+using System.Net.Sockets;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+app.UseStaticFiles(new StaticFileOptions() {
+    OnPrepareResponse = context => {
+        context.Context.Response.Headers.Add("cache-Control", "No-cache, no-store");
+        context.Context.Response.Headers.Add("Expires", "-1");
+    }
+});
+app.UseRouting();
+
+#region Setup Packages
 CPM.Core core = new();
 
 List<PackageDetails> installedPackageDetails = new List<PackageDetails>();
@@ -34,9 +47,17 @@ foreach(CPM.Package package in core.packages) {
 
 Console.WriteLine($"[{packageCount}] packages and [{commandCount}] commands installed");
 
+#endregion
 
+
+
+
+
+#region map addresses
 //This should be the core page where web browsers can control the server
-app.MapGet("/", () => "Welcome to OCAC; Open Center API Controls");
+app.MapGet("/", () => { 
+    return Results.Content(File.ReadAllText("Public/Main.html"), "Text/HTML");
+});
 
 //This is where all commands will be sent, using JSON to lay out how the commands should be performed
 app.MapPost("/Command", (CPM.RecievedCommand? command) => {
@@ -67,11 +88,32 @@ app.MapGet("/CommandData", () =>  installedPackageDetails);
 
 //This is where frontends can send data back to control the server
 app.MapPost("/ServerSettings", () => "Unset Server Settings/Control");
+#endregion
 
+
+//Setup local IP\
+string localIP = LocalIPAddress();
+
+app.Urls.Add("http://" + localIP + ":5072");
+app.Urls.Add("https://" + localIP + ":7072");
 
 app.Run();
 
 
+static string LocalIPAddress() {
+    using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0)) {
+        socket.Connect("8.8.8.8", 65530);
+        IPEndPoint? endPoint = socket.LocalEndPoint as IPEndPoint;
+        if (endPoint != null) {
+            return endPoint.Address.ToString();
+        } else {
+            return "127.0.0.1";
+        }
+    }
+}
+
+
+#region extra records for sending package details to client
 record PackageDetails {
     public string? name { get; set; }
     public string? callName { get; set; }
@@ -87,3 +129,4 @@ record CommandDetails {
     public List<CPM.ExpectedValues>? expectedValues { get; set; }
     public List<CPM.AvailableResources>? availableResources { get; set; }
 }
+#endregion
