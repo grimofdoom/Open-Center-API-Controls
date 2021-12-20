@@ -23,6 +23,17 @@ An open source project dedicated to competing with Elgato Streamdeck, and taking
     
 OCAC Read.me
 
+How to use:  
+Once built run Open Center API Controls.exe  
+In browser of any device, go to [https://hostdeviceIP:7072/] to access built in front end  
+Settings controls visual layout/appearance  
+Modify gives control over individual buttons  
+-Once you open Modify, press the button you wish to modify  
+-Make the desired changes, and press button at bottom to commit (Permenant save does not exist, yet)  
+-Close modify tab  
+-Press buttons as setup to control host computer
+
+
 API Requests:
 
 GET:/  
