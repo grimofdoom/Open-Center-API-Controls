@@ -11,7 +11,11 @@
         <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.2.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="plugins\" />
+    </ItemGroup>
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="XCOPY &quot;$(SolutionDir)wwwroot\&quot; &quot;$(TargetDir)\wwwroot&quot; /s /i /y&#xD;&#xA;XCOPY &quot;$(SolutionDir)Public\&quot; &quot;$(TargetDir)\Public&quot; /s /i /y" />
+      <Exec Command="XCOPY &quot;$(SolutionDir)wwwroot\&quot; &quot;$(TargetDir)\wwwroot&quot; /s /i /y&#xD;&#xA;XCOPY &quot;$(SolutionDir)Public\&quot; &quot;$(TargetDir)\Public&quot; /s /i /y&#xD;&#xA;XCOPY &quot;$(SolutionDir)plugins\&quot; &quot;$(TargetDir)\plugins&quot; /s /i /y" />
     </Target>
 </Project>

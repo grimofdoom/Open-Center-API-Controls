@@ -29,7 +29,7 @@ namespace CPM {
 
             //Find all packages
             List<Assembly> newPackages = new List<Assembly>();
-            string binFolder = Directory.GetCurrentDirectory() + "\\bin";
+            string binFolder = Directory.GetCurrentDirectory() + "\\plugins";
 
             foreach (string dll in Directory.GetFiles(binFolder, "*.dll")) {
                 newPackages.Add(Assembly.LoadFile(dll));
