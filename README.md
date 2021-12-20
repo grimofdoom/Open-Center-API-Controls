@@ -1,4 +1,5 @@
 # Open-Center-API-Controls
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](grimofdoom@live.com)
 An open source project dedicated to competing with Elgato Streamdeck, and taking things steps ahead.
 
     Copyright 2021, Timothy Leitzke/GrimOfDoom
