@@ -25,11 +25,11 @@ OCAC Read.me
 API Requests:
 
 GET:/
-  -Home screen for built in frontend, easily replacable by creating or using another frontend
+    -Home screen for built in frontend, easily replacable by creating or using another frontend
 
 GET:/CommandData
-  -Recieve an object containing all plugins/commands and necessary information for frontend to run
+    -Recieve an object containing all plugins/commands and necessary information for frontend to run
   
 POST:/Command [ "command" : "", "values": [ "name" : "", "value" : ""]]
-  -Send a command with expected values, defined in CommandData object
-  -MUST(?) include both a "command" value and a "values" array.
+    -Send a command with expected values, defined in CommandData object
+    -MUST(?) include both a "command" value and a "values" array.
