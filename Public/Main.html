@@ -1,36 +1,61 @@
 ﻿<!DOCTYPE html>
+
 <html>
-    <head>
-        <title>OCAC</title>
-        <link rel="stylesheet" href="CSS/main.css" />
-        <script src="JS/Main.js"></script>
-    </head>
-    <body>
-        <h1 class="noselect">OCAC Build In Frontend</h1>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-        <div class="CommandBlock noselect"><p>GrimOfDoom.OCAC_SystemControl.Sleep</p></div>
-    </body>
+<head>
+    <link rel="stylesheet" href="CSS/main.css">
+    <script src="JS/main.js" defer></script>
+</head>
+
+<body>
+    <div id="ControllerContainer">
+        <div id="ControllerHeader">
+            <ul>
+                <li onclick="OpenSettings();">Settings</li>
+                <li onclick="OpenButtonControls();">Modify</li>
+            </ul>
+        </div>
+        <div id="Controller"></div>
+    </div>
+
+
+    <div id="Settings">
+        <button onclick="ShrinkUnshrinkSettings();">Shrink Settings</button>
+        <button onclick="ShowHideMenus();">Hide Menus</button>
+        <button class="CloseButton" onclick="CloseSettings();">X</button>
+        <center><h3>Settings</h3></center>
+
+        <label>Buttons</label><input type="number" min="1" value="15" onchange="ChangButtonCount(this.value);">
+        <br>
+        <label>Columns</label><input type="number" min="0" value="5" onchange="ChangeColumns(this.value);">
+        <br>
+        <label>Size</label><input type="number" min="0" value="100" onchange="ChangeButtonSize(this.value);">
+        <br>
+        <label>Gap</label><input type="number" min="0" value="0" onchange="ChangeGap(this.value);">
+        <br>
+        <label>Corner Radius</label><input type="number" min="0" value="5" onchange="ChangeRadius(this.value);">
+        <br>
+        <label>Border Width</label><input type="number" min="0" value="0" onchange="ChangeBorderWidth(this.value);">
+    </div>
+
+    <div id="ButtonControls">
+        <button class="CloseButton" onclick="CloseButtonControls();">X</button>
+        <center><h4>Button Controls</h4></center>
+        <div id="ButtonOptions">
+            <label>Name</label><input type="text">
+            <br>
+            <label>Plugin</label><select id="PluginSelector" onchange="ChangePluginSelection(this.value);"><option value="System">System</option></select>
+            <br>
+            <label>Command</label><select id="CommandSelector" onchange="ChangeCommandSelection(this.value);"><option value="Sleep">Sleep</option><option value="Shutdown">Shutdown</option></select>
+            <hr>
+            <p id="CommandDesc">Description: </p><br>
+            <label>Input (Newline for each variable/value)</label><br><textarea id="CommandInputs"></textarea>
+            <br>
+            <button onclick="SetCommandButton()">Set Button</button>
+        </div>
+    </div>
+
+    <template id="ControllerButtonTemplate">
+        <div class="ButtonController" data-btnID="" onclick="PerformCommand(this);"></div>
+    </template>
+</body>
 </html>

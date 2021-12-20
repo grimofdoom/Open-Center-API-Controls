@@ -1,8 +1,23 @@
 using System.Net;
 using System.Net.Sockets;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions {
+    ApplicationName = typeof(Program).Assembly.FullName,
+    ContentRootPath = Directory.GetCurrentDirectory(),
+    EnvironmentName = Environments.Staging,
+    WebRootPath = "wwwroot"
+});
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
+
+app.UseCors(builder => {
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(new StaticFileOptions() {
@@ -61,8 +76,11 @@ app.MapGet("/", () => {
 
 //This is where all commands will be sent, using JSON to lay out how the commands should be performed
 app.MapPost("/Command", (CPM.RecievedCommand? command) => {
+    Console.WriteLine("Performing some command");
+
     //Double check that nothing went bad
     if (command == null) {
+        Console.WriteLine(command);
         return Results.BadRequest();
     }
 

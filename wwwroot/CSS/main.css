@@ -1,60 +1,113 @@
-﻿body {
-    margin: 0px;
-    padding: 0px;
+﻿:root {
+    --Controller-Width: 510px;
+    --Button-Margin: 0px;
+    --Button-Size: 100px;
+    --Button-Radius: 5px;
+    --Button-Border-Width: 1px;
 }
 
-
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-}
-
-
-#ButtonContainer{
-    width: 100%;
-    height: 30%;
-}
-
-.CommandBlock {
+body {
+    background-color: black;
+    margin: 0;
     padding: 0;
-    background-color: white;
-    margin: 2px;
-    height: 100px;
-    width: 100px;
-    border: 1px solid black;
+}
+
+
+/**Controller**/
+#ControllerContainer {
+    max-width: var(--Controller-Width);
+    width: var(--Controller-Width);
+}
+
+#ControllerHeader {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+}
+
+    #ControllerHeader ul {
+        margin: auto;
+        margin-left: 10px;
+        padding: 0;
+    }
+
+    #ControllerHeader li {
+        display: inline-block;
+        border: 1px solid black;
+        border-width: 0px 1px 0px 0px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin: 0;
+        list-style-type: none;
+    }
+
+        #ControllerHeader li:hover {
+            background-color: violet;
+        }
+
+        #ControllerHeader li:last-child {
+            border: 0;
+        }
+
+#Controller {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: darkslategrey;
     border-radius: 5px;
+}
+
+.ButtonController {
+    border: 1px solid black;
+    border-width: var(--Button-Border-Width);
+    border-radius: var(--Button-Radius);
+    width: var(--Button-Size);
+    height: var(--Button-Size);
     display: inline-block;
-    align-content: center;
-    text-align: center;
-    word-wrap: anywhere;
-    transition-duration: 500ms;
-    z-index: 400;
+    margin: var(--Button-Margin);
+    padding: 0px;
+    vertical-align: top;
+    background-color: cyan;
 }
 
-.CommandBlock:hover {
-    animation: cmdBlock_Hover 300ms ease 0s 1 normal forwards;
+.ActiveButtonController {
+    transform: scale(1.1) !important;
+    border-color: yellow !important;
 }
 
-@keyframes cmdBlock_Hover{
-    0% {
-        z-index: 500;
+.ButtonController:hover {
+    background-color: violet;
+}
+
+
+/**Settings**/
+#Settings, #ButtonControls {
+    border: 1px solid black;
+    background-color: grey;
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: right;
+    width: 270px;
+    max-width: 270px;
+}
+
+    #Settings input[type=number] {
+        width: 50%;
     }
-    100% {
-        transform: scale(1.1);
-    }
+
+.CloseButton {
+    float: right;
 }
 
-.CommandBlock:active {
-    transition-delay: 0ms;
-    background-color: red;
+/*Button Highlight*/
+.HighlightButton {
+    -webkit-box-shadow: inset 0px 0px 50px 4px rgba(255,253,69) !important;
+    box-shadow: inset 0px 0px 50px 4px rgba(255,253,69) !important;
 }
 
-.CommandBlock p{
-    width: fit-content;
-    height: fit-content;
+#CommandDesc {
+    max-width: 100%;
+    word-wrap: break-word;
 }
