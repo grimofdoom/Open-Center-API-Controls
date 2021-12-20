@@ -1,3 +1,24 @@
+/*
+ *  Copyright 2021, Timothy Leitzke/GrimOfDoom
+
+    GPL-V3
+
+    This file is part of OCAC (Open Center API Controls).
+
+    OCAC is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    Timothy Leitzke, version 3 of the License.
+
+    OCAC is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+
 using System.Net;
 using System.Net.Sockets;
 
@@ -131,6 +152,15 @@ static string LocalIPAddress() {
 }
 
 
+#region Proper copyrights MUST BE LEFT IN
+//CREDITS MUST BE LEFT IN VIA ONE FORM OR ANOTHER. SHOULD CREDITS TO ORIGINAL CREATOR/S BE REMOVED OR LEFT OUT,
+//THE CREATOR OF THE MODIFIED SOFTWARE SHALL HAVE THE RIGHT TO GPL-v3 ACCESS TO MODIFY AND/OR PUBLISH THE SOFTWARE REVOKED.
+Console.WriteLine("OCAC, Open Center API Controls, was developed by Timothy Leitzke (AKA: GrimOfDoom), and is available" +
+    " for open source use under the GPL-v3 license.");
+
+#endregion
+
+
 #region extra records for sending package details to client
 record PackageDetails {
     public string? name { get; set; }
@@ -148,3 +178,4 @@ record CommandDetails {
     public List<CPM.AvailableResources>? availableResources { get; set; }
 }
 #endregion
+
